@@ -1,0 +1,40 @@
+{
+  "name": "ride-hailing-entities",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf ./build && tsc",
+    "typeorm:cli": "ts-node ./node_modules/typeorm/cli",
+    "migration:create": "npm run typeorm:cli -- migration:create",
+    "create-table": "npm run typeorm:cli -- migration:run -d ormconfig.ts",
+    "drop-table": "npm run typeorm:cli -- migration:revert -d ormconfig.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ranaawni/ride-hailing-entities.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ranaawni/ride-hailing-entities/issues"
+  },
+  "homepage": "https://github.com/ranaawni/ride-hailing-entities#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "glob": "^10.4.2",
+    "mysql": "^2.18.1",
+    "rimraf": "^5.0.7",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.14.9",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
+  }
+}
