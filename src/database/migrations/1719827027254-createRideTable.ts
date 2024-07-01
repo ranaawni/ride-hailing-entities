@@ -1,27 +1,29 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class CreateRideTable1719776407127 implements MigrationInterface {
+export class CreateRideTable1719827027254 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
-        CREATE TABLE ride (
+        CREATE TABLE IF NOT EXISTS ride (
             id int not null primary key auto_increment,
-            userId INT(30),
+            riderId INT(30),
             driverId INT(30),
             status varchar(20) NOT NULL,
             source GEOMETRY,
             destination GEOMETRY,
             createdAt timestamp NOT NULL DEFAULT now(),
-            CONSTRAINT FK_ride_user FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            CONSTRAINT FK_ride_driver FOREIGN KEY (driverId) REFERENCES driver(id) ON DELETE CASCADE ON UPDATE CASCADE
+            KEY IDX_RIDE_RIDER (riderId),
+            KEY IDX_RIDE_DRIVER (driverId),
+            CONSTRAINT FK_ride_user FOREIGN KEY (riderId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            CONSTRAINT FK_ride_driver FOREIGN KEY (driverId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE
         );
     `);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
-        DROP TABLE "ride";
-    `);
+        DROP TABLE ride;
+    `); 
     }
 
 }

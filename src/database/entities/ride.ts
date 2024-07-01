@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
 import { User } from './user';
-import { Driver } from './driver';
 
 @Entity()
 export class Ride {
@@ -10,14 +9,14 @@ export class Ride {
       })
       id: number;
 
-  @ManyToOne(() => User, user => user.rides)
-  user: User;
+  @ManyToOne(() => User, user => user.requestedRides)
+  rider: User;
 
   @Column()
-  userId: string;
+  riderId: string;
 
-  @ManyToOne(() => Driver, driver => driver.rides)
-  driver: Driver;
+  @ManyToOne(() => User, user => user.acceptedRides)
+  driver: User;
 
   @Column()
   driverId: string;

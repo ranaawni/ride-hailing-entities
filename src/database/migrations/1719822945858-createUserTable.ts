@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class CreateUserTable1719776212362 implements MigrationInterface {
+export class CreateUserTable1719822945858 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
@@ -10,6 +10,7 @@ export class CreateUserTable1719776212362 implements MigrationInterface {
                 lastName varchar(20) NOT NULL,
                 email varchar(50) NOT NULL,
                 password varchar(150) NOT NULL,
+                role enum('rider', 'driver') NOT NULL,
                 createdAt timestamp NOT NULL DEFAULT now()
             );
         `);
@@ -17,17 +18,8 @@ export class CreateUserTable1719776212362 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
-        DROP TABLE "user";
+        DROP TABLE user;
     `);  
     }
 
-
 }
-
-
-
-
-
-
-         
-        

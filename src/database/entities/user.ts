@@ -2,6 +2,11 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, Be
 import { Ride } from './ride';
 import * as bcrypt from 'bcrypt';
 
+
+export enum UserRole {
+  RIDER = "rider",
+  DRIVER = "driver",
+}
 @Entity()
 export class User {
   @PrimaryGeneratedColumn({
@@ -22,14 +27,23 @@ export class User {
   @Column()
   password: string;
 
+  @Column({
+    type: "enum",
+    enum: UserRole,
+  })
+  role: UserRole;
+
   @CreateDateColumn({
     type: "timestamp",
     default: () => "CURRENT_TIMESTAMP(6)",
   })
   createdAt: Date;
 
-  @OneToMany(() => Ride, ride => ride.user)
-  rides: Ride[];
+  @OneToMany(() => Ride, (ride) => ride.rider)
+    requestedRides: Ride[];
+
+  @OneToMany(() => Ride, (ride) => ride.driver)
+    acceptedRides: Ride[];
 
   @BeforeInsert()
   async hashPassword() {
