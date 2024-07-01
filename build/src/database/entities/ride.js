@@ -51,11 +51,27 @@ var Ride = /** @class */ (function () {
         __metadata("design:type", String)
     ], Ride.prototype, "status", void 0);
     __decorate([
-        (0, typeorm_1.Column)('geometry', { spatialFeatureType: 'Point', srid: 4326 }),
+        (0, typeorm_1.Column)({
+            type: 'geometry',
+            spatialFeatureType: 'Point',
+            srid: 4326,
+            transformer: {
+                to: function (value) { return "ST_GeomFromText('POINT(".concat(value.coordinates[0], " ").concat(value.coordinates[1], ")', 4326)"); },
+                from: function (value) { return value; },
+            }
+        }),
         __metadata("design:type", Object)
     ], Ride.prototype, "source", void 0);
     __decorate([
-        (0, typeorm_1.Column)('geometry', { spatialFeatureType: 'Point', srid: 4326 }),
+        (0, typeorm_1.Column)({
+            type: 'geometry',
+            spatialFeatureType: 'Point',
+            srid: 4326,
+            transformer: {
+                to: function (value) { return "ST_GeomFromText('POINT(".concat(value.coordinates[0], " ").concat(value.coordinates[1], ")', 4326)"); },
+                from: function (value) { return value; },
+            }
+        }),
         __metadata("design:type", Object)
     ], Ride.prototype, "destination", void 0);
     __decorate([

@@ -33,12 +33,29 @@ export class Ride {
   })
   status: RideStatus;
 
-  @Column('geometry', { spatialFeatureType: 'Point', srid: 4326 })
+  @Column({
+    type: 'geometry',
+    spatialFeatureType: 'Point',
+    srid: 4326,
+    transformer: {
+      to: (value: { type: string, coordinates: number[] }) => `ST_GeomFromText('POINT(${value.coordinates[0]} ${value.coordinates[1]})', 4326)`,
+      from: (value: string) => value,
+    }
+  })
   source: { type: 'Point', coordinates: [number, number] };
 
-  @Column('geometry', { spatialFeatureType: 'Point', srid: 4326 })
+  @Column({
+    type: 'geometry',
+    spatialFeatureType: 'Point',
+    srid: 4326,
+    transformer: {
+      to: (value: { type: string, coordinates: number[] }) => `ST_GeomFromText('POINT(${value.coordinates[0]} ${value.coordinates[1]})', 4326)`,
+      from: (value: string) => value,
+    }
+  })
   destination: { type: 'Point', coordinates: [number, number] };
 
+  
   @CreateDateColumn({
     type: "timestamp",
     default: () => "CURRENT_TIMESTAMP(6)",
