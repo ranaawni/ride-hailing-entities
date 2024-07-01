@@ -18,13 +18,13 @@ export class Ride {
   rider: User;
 
   @Column()
-  riderId: string;
+  riderId: number;
 
   @ManyToOne(() => User, user => user.acceptedRides)
   driver: User;
 
   @Column()
-  driverId: string;
+  driverId: number;
 
 
   @Column({

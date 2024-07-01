@@ -6,9 +6,9 @@ export declare enum RideStatus {
 export declare class Ride {
     id: number;
     rider: User;
-    riderId: string;
+    riderId: number;
     driver: User;
-    driverId: string;
+    driverId: number;
     status: RideStatus;
     source: {
         type: 'Point';

@@ -33,7 +33,7 @@ var Ride = /** @class */ (function () {
     ], Ride.prototype, "rider", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
+        __metadata("design:type", Number)
     ], Ride.prototype, "riderId", void 0);
     __decorate([
         (0, typeorm_1.ManyToOne)(function () { return user_1.User; }, function (user) { return user.acceptedRides; }),
@@ -41,7 +41,7 @@ var Ride = /** @class */ (function () {
     ], Ride.prototype, "driver", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
+        __metadata("design:type", Number)
     ], Ride.prototype, "driverId", void 0);
     __decorate([
         (0, typeorm_1.Column)({
