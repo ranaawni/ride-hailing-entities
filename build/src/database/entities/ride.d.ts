@@ -10,13 +10,7 @@ export declare class Ride {
     driver: User;
     driverId: number;
     status: RideStatus;
-    source: {
-        type: 'Point';
-        coordinates: [number, number];
-    };
-    destination: {
-        type: 'Point';
-        coordinates: [number, number];
-    };
+    source: string;
+    destination: string;
     createdAt: Date;
 }
