@@ -68,10 +68,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.User = exports.UserRole = void 0;
 var typeorm_1 = require("typeorm");
 var ride_1 = require("./ride");
 var bcrypt = __importStar(require("bcrypt"));
+var UserRole;
+(function (UserRole) {
+    UserRole["RIDER"] = "rider";
+    UserRole["DRIVER"] = "driver";
+})(UserRole || (exports.UserRole = UserRole = {}));
 var User = /** @class */ (function () {
     function User() {
     }
@@ -91,8 +96,11 @@ var User = /** @class */ (function () {
         });
     };
     __decorate([
-        (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
-        __metadata("design:type", String)
+        (0, typeorm_1.PrimaryGeneratedColumn)({
+            type: "int",
+            name: "id",
+        }),
+        __metadata("design:type", Number)
     ], User.prototype, "id", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
@@ -111,13 +119,27 @@ var User = /** @class */ (function () {
         __metadata("design:type", String)
     ], User.prototype, "password", void 0);
     __decorate([
-        (0, typeorm_1.CreateDateColumn)(),
+        (0, typeorm_1.Column)({
+            type: "enum",
+            enum: UserRole,
+        }),
+        __metadata("design:type", String)
+    ], User.prototype, "role", void 0);
+    __decorate([
+        (0, typeorm_1.CreateDateColumn)({
+            type: "timestamp",
+            default: function () { return "CURRENT_TIMESTAMP(6)"; },
+        }),
         __metadata("design:type", Date)
     ], User.prototype, "createdAt", void 0);
     __decorate([
-        (0, typeorm_1.OneToMany)(function () { return ride_1.Ride; }, function (ride) { return ride.user; }),
+        (0, typeorm_1.OneToMany)(function () { return ride_1.Ride; }, function (ride) { return ride.rider; }),
         __metadata("design:type", Array)
-    ], User.prototype, "rides", void 0);
+    ], User.prototype, "requestedRides", void 0);
+    __decorate([
+        (0, typeorm_1.OneToMany)(function () { return ride_1.Ride; }, function (ride) { return ride.driver; }),
+        __metadata("design:type", Array)
+    ], User.prototype, "acceptedRides", void 0);
     __decorate([
         (0, typeorm_1.BeforeInsert)(),
         __metadata("design:type", Function),

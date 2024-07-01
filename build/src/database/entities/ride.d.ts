@@ -1,10 +1,9 @@
 import { User } from './user';
-import { Driver } from './driver';
 export declare class Ride {
-    id: string;
-    user: User;
-    userId: string;
-    driver: Driver;
+    id: number;
+    rider: User;
+    riderId: string;
+    driver: User;
     driverId: string;
     status: string;
     source: {

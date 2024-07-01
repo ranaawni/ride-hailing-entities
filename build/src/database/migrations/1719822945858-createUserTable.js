@@ -36,15 +36,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateDriverTable1719776277128 = void 0;
-var CreateDriverTable1719776277128 = /** @class */ (function () {
-    function CreateDriverTable1719776277128() {
+exports.CreateUserTable1719822945858 = void 0;
+var CreateUserTable1719822945858 = /** @class */ (function () {
+    function CreateUserTable1719822945858() {
     }
-    CreateDriverTable1719776277128.prototype.up = function (queryRunner) {
+    CreateUserTable1719822945858.prototype.up = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, queryRunner.query("\n        CREATE TABLE \"driver\" (\n            \"id\" uuid PRIMARY KEY,\n            \"firstName\" varchar(255) NOT NULL,\n            \"lastName\" varchar(255) NOT NULL,\n            \"email\" varchar(255) NOT NULL,\n            \"password\" varchar(255) NOT NULL,\n            \"location\" geometry(Point,4326),\n            \"createdAt\" timestamp NOT NULL DEFAULT now()\n        );\n    ")];
+                    case 0: return [4 /*yield*/, queryRunner.query("\n            CREATE TABLE  IF NOT EXISTS user (\n                id int not null primary key auto_increment,\n                firstName varchar(20) NOT NULL,\n                lastName varchar(20) NOT NULL,\n                email varchar(50) NOT NULL,\n                password varchar(150) NOT NULL,\n                role enum('rider', 'driver') NOT NULL,\n                createdAt timestamp NOT NULL DEFAULT now()\n            );\n        ")];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -52,11 +52,11 @@ var CreateDriverTable1719776277128 = /** @class */ (function () {
             });
         });
     };
-    CreateDriverTable1719776277128.prototype.down = function (queryRunner) {
+    CreateUserTable1719822945858.prototype.down = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, queryRunner.query("\n        DROP TABLE \"driver\";\n    ")];
+                    case 0: return [4 /*yield*/, queryRunner.query("\n        DROP TABLE user;\n    ")];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -64,7 +64,7 @@ var CreateDriverTable1719776277128 = /** @class */ (function () {
             });
         });
     };
-    return CreateDriverTable1719776277128;
+    return CreateUserTable1719822945858;
 }());
-exports.CreateDriverTable1719776277128 = CreateDriverTable1719776277128;
-//# sourceMappingURL=1719776277128-createDriverTable.js.map
+exports.CreateUserTable1719822945858 = CreateUserTable1719822945858;
+//# sourceMappingURL=1719822945858-createUserTable.js.map

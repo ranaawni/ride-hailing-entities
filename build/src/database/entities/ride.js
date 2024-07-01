@@ -12,25 +12,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ride = void 0;
 var typeorm_1 = require("typeorm");
 var user_1 = require("./user");
-var driver_1 = require("./driver");
 var Ride = /** @class */ (function () {
     function Ride() {
     }
     __decorate([
-        (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
-        __metadata("design:type", String)
+        (0, typeorm_1.PrimaryGeneratedColumn)({
+            type: "int",
+            name: "id",
+        }),
+        __metadata("design:type", Number)
     ], Ride.prototype, "id", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return user_1.User; }, function (user) { return user.rides; }),
+        (0, typeorm_1.ManyToOne)(function () { return user_1.User; }, function (user) { return user.requestedRides; }),
         __metadata("design:type", user_1.User)
-    ], Ride.prototype, "user", void 0);
+    ], Ride.prototype, "rider", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", String)
-    ], Ride.prototype, "userId", void 0);
+    ], Ride.prototype, "riderId", void 0);
     __decorate([
-        (0, typeorm_1.ManyToOne)(function () { return driver_1.Driver; }, function (driver) { return driver.rides; }),
-        __metadata("design:type", driver_1.Driver)
+        (0, typeorm_1.ManyToOne)(function () { return user_1.User; }, function (user) { return user.acceptedRides; }),
+        __metadata("design:type", user_1.User)
     ], Ride.prototype, "driver", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
@@ -49,7 +51,10 @@ var Ride = /** @class */ (function () {
         __metadata("design:type", Object)
     ], Ride.prototype, "destination", void 0);
     __decorate([
-        (0, typeorm_1.CreateDateColumn)(),
+        (0, typeorm_1.CreateDateColumn)({
+            type: "timestamp",
+            default: function () { return "CURRENT_TIMESTAMP(6)"; },
+        }),
         __metadata("design:type", Date)
     ], Ride.prototype, "createdAt", void 0);
     Ride = __decorate([

@@ -36,15 +36,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateRideTable1719776407127 = void 0;
-var CreateRideTable1719776407127 = /** @class */ (function () {
-    function CreateRideTable1719776407127() {
+exports.CreateRideTable1719827027254 = void 0;
+var CreateRideTable1719827027254 = /** @class */ (function () {
+    function CreateRideTable1719827027254() {
     }
-    CreateRideTable1719776407127.prototype.up = function (queryRunner) {
+    CreateRideTable1719827027254.prototype.up = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, queryRunner.query("\n        CREATE TABLE \"ride\" (\n            \"id\" uuid PRIMARY KEY,\n            \"userId\" uuid,\n            \"driverId\" uuid,\n            \"status\" varchar(255) NOT NULL,\n            \"source\" geometry(Point,4326),\n            \"destination\" geometry(Point,4326),\n            \"createdAt\" timestamp NOT NULL DEFAULT now(),\n            CONSTRAINT \"FK_ride_user\" FOREIGN KEY (\"userId\") REFERENCES \"user\"(\"id\") ON DELETE CASCADE ON UPDATE CASCADE,\n            CONSTRAINT \"FK_ride_driver\" FOREIGN KEY (\"driverId\") REFERENCES \"driver\"(\"id\") ON DELETE CASCADE ON UPDATE CASCADE\n        );\n    ")];
+                    case 0: return [4 /*yield*/, queryRunner.query("\n        CREATE TABLE IF NOT EXISTS ride (\n            id int not null primary key auto_increment,\n            riderId INT(30),\n            driverId INT(30),\n            status varchar(20) NOT NULL,\n            source GEOMETRY,\n            destination GEOMETRY,\n            createdAt timestamp NOT NULL DEFAULT now(),\n            KEY IDX_RIDE_RIDER (riderId),\n            KEY IDX_RIDE_DRIVER (driverId),\n            CONSTRAINT FK_ride_user FOREIGN KEY (riderId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE,\n            CONSTRAINT FK_ride_driver FOREIGN KEY (driverId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE\n        );\n    ")];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -52,11 +52,11 @@ var CreateRideTable1719776407127 = /** @class */ (function () {
             });
         });
     };
-    CreateRideTable1719776407127.prototype.down = function (queryRunner) {
+    CreateRideTable1719827027254.prototype.down = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, queryRunner.query("\n        DROP TABLE \"ride\";\n    ")];
+                    case 0: return [4 /*yield*/, queryRunner.query("\n        DROP TABLE ride;\n    ")];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -64,7 +64,7 @@ var CreateRideTable1719776407127 = /** @class */ (function () {
             });
         });
     };
-    return CreateRideTable1719776407127;
+    return CreateRideTable1719827027254;
 }());
-exports.CreateRideTable1719776407127 = CreateRideTable1719776407127;
-//# sourceMappingURL=1719776407127-createRideTable.js.map
+exports.CreateRideTable1719827027254 = CreateRideTable1719827027254;
+//# sourceMappingURL=1719827027254-createRideTable.js.map
