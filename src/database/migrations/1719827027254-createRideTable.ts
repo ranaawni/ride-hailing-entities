@@ -8,7 +8,7 @@ export class CreateRideTable1719827027254 implements MigrationInterface {
             id int not null primary key auto_increment,
             riderId INT(30),
             driverId INT(30),
-            status varchar(20) NOT NULL,
+            status enum('requested', 'accepted') NOT NULL,
             source GEOMETRY,
             destination GEOMETRY,
             createdAt timestamp NOT NULL DEFAULT now(),

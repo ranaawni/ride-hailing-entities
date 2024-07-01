@@ -1,6 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
 import { User } from './user';
 
+export enum RideStatus {
+  REQUESTED = "requested",
+  ACCEPTED = "accepted",
+}
+
 @Entity()
 export class Ride {
   @PrimaryGeneratedColumn({
@@ -21,8 +26,12 @@ export class Ride {
   @Column()
   driverId: string;
 
-  @Column()
-  status: string;
+
+  @Column({
+    type: "enum",
+    enum: RideStatus,
+  })
+  status: RideStatus;
 
   @Column('geometry', { spatialFeatureType: 'Point', srid: 4326 })
   source: { type: 'Point', coordinates: [number, number] };

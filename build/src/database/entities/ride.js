@@ -9,9 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Ride = void 0;
+exports.Ride = exports.RideStatus = void 0;
 var typeorm_1 = require("typeorm");
 var user_1 = require("./user");
+var RideStatus;
+(function (RideStatus) {
+    RideStatus["REQUESTED"] = "requested";
+    RideStatus["ACCEPTED"] = "accepted";
+})(RideStatus || (exports.RideStatus = RideStatus = {}));
 var Ride = /** @class */ (function () {
     function Ride() {
     }
@@ -39,7 +44,10 @@ var Ride = /** @class */ (function () {
         __metadata("design:type", String)
     ], Ride.prototype, "driverId", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
+        (0, typeorm_1.Column)({
+            type: "enum",
+            enum: RideStatus,
+        }),
         __metadata("design:type", String)
     ], Ride.prototype, "status", void 0);
     __decorate([
