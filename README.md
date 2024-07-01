@@ -1,6 +1,6 @@
 # ride-hailing-entities
 
-It contains a stored procedure to retrieve all rides for a particular user and creates tables, migrations, and entities for both users and rides. It is used as a npm package inside the [ride-hailing-app].
+It contains a stored procedure to retrieve all rides for a particular user and creates tables, migrations, and entities for both users and rides. It is used as a npm package inside the [ride-hailing-app](https://github.com/ranaawni/ride-hailing-app).
 
 ## How to run
 
